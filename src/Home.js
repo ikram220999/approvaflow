@@ -1,7 +1,16 @@
+import axios from "axios";
 import React from "react";
 import { Link } from "react-router-dom";
 
 const Home = () => {
+
+  const createFlow = () => {
+    axios.post(`${process.env.REACT_APP_API_HOSTNAME}/api/flow/new`).then((res) => {
+
+    }).catch((err) => {
+      
+    })
+  }
   return (
     <div className="my-20">
       <h4 className="text-4xl font-bold my-5">
@@ -15,12 +24,13 @@ const Home = () => {
         ? Here is your one stop solution for that problem
       </p>
       {/* <h4 className="text-lg font-semibold mb-2">Need approval ? </h4> */}
-      <Link to={"/new"}>
-        <button className="py-4 px-7 border bg-indigo-700 text-sm sm:text-lg text-white font-bold rounded-lg hover:bg-indigo-600 mt-8">
+      {/* <Link to={"/new"}> */}
+        <button className="py-4 px-7 border bg-indigo-700 text-sm sm:text-lg text-white font-bold rounded-lg hover:bg-indigo-600 mt-8"
+        onClick={() => createFlow()}>
           {" "}
           Create Approval Flow
         </button>
-      </Link>
+      {/* </Link> */}
       <div className="w-1/2 sm:w-1/3 m-auto flex flex-col justify-center items-center mt-20 gap-2">
         <p className="font-semibold text-gray-400 text-sm sm:text-lg">Track approval</p>
         <input

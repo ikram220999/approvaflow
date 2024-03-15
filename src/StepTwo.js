@@ -30,23 +30,23 @@ const StepTwo = (props) => {
       <div className="flex flex-col gap-3">
         <div className="border rounded-lg px-4 flex flex-col gap-3 py-4">
           <input
-            type="text"
-            className="border py-1.5 px-4 rounded-md w-full "
-            placeholder="position"
-            name="position"
-            value={input.position}
-            onChange={handleChange}
-          />
-          <input
             type="email"
-            className="border py-1.5 px-4 rounded-md w-full "
+            className="border py-1.5 px-4 rounded-md w-full font-semibold "
             placeholder="Email"
             name="email"
             value={input.email}
             onChange={handleChange}
           />
+           <input
+            type="text"
+            className="border py-1.5 px-4 rounded-md w-full "
+            placeholder="Position"
+            name="position"
+            value={input.position}
+            onChange={handleChange}
+          />
           <button
-            className="py-2 px-5 border bg-indigo-700 text-white font-bold rounded-lg hover:bg-indigo-600 mt-8 text-sm sm:text-lg"
+            className="py-2 px-5 border bg-indigo-700 text-white font-bold rounded-lg hover:bg-indigo-600 mt-8 text-sm sm:text-md"
             onClick={() => addApprover()}
           >
             {" "}

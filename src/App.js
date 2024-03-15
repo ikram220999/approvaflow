@@ -8,9 +8,9 @@ import Submission from "./Submission";
 
 function App() {
   return (
-    <div className="App my-4 h-screen flex items-center bg-indigo-50">
+    <div className="App py-6 min-h-screen flex items-center bg-indigo-50">
       <Toaster />
-      <div className="border w-11/12 md:w-4/5 lg:w-1/2 rounded-2xl m-auto my-4 shadow-lg bg-white">
+      <div className="border w-11/12 md:w-4/5 lg:w-1/2 rounded-2xl m-auto shadow-lg py-4 bg-white">
        <BrowserRouter>
         <Routes>
           <Route path="*" element={<Navigate to={"/"} />}></Route>

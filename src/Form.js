@@ -47,17 +47,25 @@ const Form = () => {
         )}
         <div className="w-full flex justify-end">
           {step === 1 ? (
-            <button
-              className="py-2 px-5 border text-sm sm:text-lg bg-indigo-700 text-white font-bold rounded-lg hover:bg-indigo-600 mt-8"
-              onClick={() => setStep(2)}
-            >
-              {" "}
-              Next
-            </button>
+            <div className="flex gap-2">
+              <Link to={"/home"}>
+                <button className="py-2 px-5 border text-sm sm:text-md bg-indigo-100 text-gray-500 font-bold rounded-lg hover:bg-indigo-200 mt-8">
+                  {" "}
+                  Cancel
+                </button>
+              </Link>
+              <button
+                className="py-2 px-5 border text-sm sm:text-md bg-indigo-700 text-white font-bold rounded-lg hover:bg-indigo-600 mt-8"
+                onClick={() => setStep(2)}
+              >
+                {" "}
+                Next
+              </button>
+            </div>
           ) : (
             <div className="flex gap-2">
               <button
-                className="py-2 px-5 border text-sm sm:text-lg bg-indigo-100 text-gray-500 font-bold rounded-lg hover:bg-indigo-200 mt-8"
+                className="py-2 px-5 border text-sm sm:text-md bg-indigo-100 text-gray-500 font-bold rounded-lg hover:bg-indigo-200 mt-8"
                 onClick={() => setStep(1)}
               >
                 {" "}
@@ -65,8 +73,8 @@ const Form = () => {
               </button>
               <Link to={"/submission"}>
                 <button
-                  className="py-2 px-5 border text-sm sm:text-lg bg-indigo-700 text-white font-bold rounded-lg hover:bg-indigo-600 mt-8"
-                //   onClick={""}
+                  className="py-2 px-5 border text-sm sm:text-md bg-indigo-700 text-white font-bold rounded-lg hover:bg-indigo-600 mt-8"
+                  //   onClick={""}
                 >
                   {" "}
                   Submit
