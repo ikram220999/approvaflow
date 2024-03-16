@@ -102,6 +102,14 @@ const CheckApproval = () => {
             ))
           : ""}
       </div>
+      <Link to={"/home"}>
+      <button
+          className=" mt-6 py-2 w-1/2 sm:w-1/4 border bg-indigo-600 text-sm sm:text-lg text-white font-bold rounded-lg hover:bg-gray-500"
+        >
+          {" "}
+          Home
+        </button>
+      </Link>
     </div>
   );
 };
