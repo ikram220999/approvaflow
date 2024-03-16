@@ -10,6 +10,7 @@ const StepOne = (props) => {
   return (
     <>
       <div className="flex flex-col gap-3">
+        <b>Sender details</b>
         <input
           type="email"
           className="border py-1.5 px-4 rounded-md w-full font-semibold"

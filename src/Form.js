@@ -19,43 +19,47 @@ const Form = () => {
   const [approver, setApprover] = useState([]);
 
   const submitApproval = () => {
-    const submitToast = toast.loading("Submitting ...")
+    const submitToast = toast.loading("Submitting ...");
 
-    if(approver.length > 0){
+    if (approver.length > 0) {
       axios
-      .post(
-        `${process.env.REACT_APP_API_HOSTNAME}/api/flow/submit/` + params.id,
-        { approver: approver }
+        .post(
+          `${process.env.REACT_APP_API_HOSTNAME}/api/flow/submit/` + params.id,
+          { approver: approver }
         )
         .then((res) => {
           console.log("res", res);
           if (res) {
-            toast.remove(submitToast)
-            navigate("/submission/" + params.id)
+            toast.remove(submitToast);
+            navigate("/submission/" + params.id);
           }
         })
         .catch((err) => {
-          toast.error("Error submit flow")
+          toast.error("Error submit flow");
         });
     } else {
-      toast.remove(submitToast)
-      toast.error("Need at least 1 approver")
+      toast.remove(submitToast);
+      toast.error("Need at least 1 approver");
     }
   };
 
   const saveStepOne = () => {
-    axios
-      .post(
-        `${process.env.REACT_APP_API_HOSTNAME}/api/flow/update/` + params.id,
-        input
-      )
-      .then((res) => {
-        console.log("res", res);
-        if (res) {
-          setStep(2);
-        }
-      })
-      .catch((err) => {});
+    if (input.email == "") {
+      toast.error("Sender details required");
+    } else {
+      axios
+        .post(
+          `${process.env.REACT_APP_API_HOSTNAME}/api/flow/update/` + params.id,
+          input
+        )
+        .then((res) => {
+          console.log("res", res);
+          if (res) {
+            setStep(2);
+          }
+        })
+        .catch((err) => {});
+    }
   };
 
   useEffect(() => {

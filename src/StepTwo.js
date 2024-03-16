@@ -48,6 +48,7 @@ const StepTwo = (props) => {
   return (
     <>
       <div className="flex flex-col gap-3">
+        <b>Approver details</b>
         <div className="border rounded-lg px-4 flex flex-col gap-3 py-4">
           <input
             type="email"
