@@ -63,38 +63,37 @@ const CheckApproval = () => {
         <h4 className="text-lg font-bold ">Approval Status</h4>
         <div className="rounded-lg flex flex-col w-full gap-4 ">
           <div className="flex flex-col w-full sm:flex-row gap-2">
-            <b className="sm:w-1/4 w-full text-left text-sm sm:text-md">Title</b>
-            <p className="sm:w-3/4 w-full text-left border p-2 rounded-md bg-gray-100 font-semibold text-sm sm:text-md">
+            <b className="sm:w-1/4 w-full text-left text-sm sm:text-lg">Title</b>
+            <p className="sm:w-3/4 w-full text-left border p-2 rounded-md bg-gray-100 font-semibold text-sm sm:text-lg">
               {approval.title}
             </p>
           </div>
           <div className="flex w-full flex-col w-full sm:flex-row gap-2">
-            <b className="sm:w-1/4 w-full text-left text-sm sm:text-md">Description</b>
-            <p className="sm:w-3/4 w-full text-left border p-2 rounded-md bg-gray-100 text-sm sm:text-md">
+            <b className="sm:w-1/4 w-full text-left text-sm sm:text-lg">Description</b>
+            <p className="sm:w-3/4 w-full text-left border p-2 rounded-md bg-gray-100 text-sm sm:text-lg">
               {approval.description}
             </p>
           </div>
         </div>
       </div>
-      <div className="border rounded-lg border-2 mt-4 py-4">
+      <div className=" rounded-lg -2 mt-4 py-4">
         <h4 className="text-sm sm:text-lg font-bold ">List Responder</h4>
         {approver
           ? approver.map((app, idx) => (
-              <div class=" mx-4 flex px-4 py-3 bg-white-600 text-gray-700 border rounded-md rounded flex-col md:flex-row mt-4">
+              <div class=" flex px-4 py-3 bg-white-600 text-gray-700 border rounded-md rounded flex-col md:flex-row mt-4">
                 <div class="flex items-center justify-between w-full text-left ">
-                  <div className=" w-1/6">
+                  <div className=" w-1/7">
                     <h1 class="md:text-lg text-left  ">{idx + 1}</h1>
                   </div>
-                  <div className="flex flex-col text-left items-start  md:text-lg w-4/6">
-                    <h1 class="md:text-xl font-semibold text-left">
+                  <div className="flex flex-col text-left items-start  md:text-md w-3/6">
+                    <h1 class="md:text-lg font-semibold text-left text-sm">
                       {app.email}
                     </h1>
-                    <h3>
-                      <i></i>
+                    <h3 class="md:text-lg font-semibold text-left text-sm">
                       {app.role}
                     </h3>
                   </div>
-                  <div className="flex flex-col md:text-lg w-1/6">
+                  <div className="flex flex-col md:text-lg w-2/6">
                     {renderStatus(app.status)}
                   </div>
                 </div>
