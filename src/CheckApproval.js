@@ -63,21 +63,21 @@ const CheckApproval = () => {
         <h4 className="text-lg font-bold ">Approval Status</h4>
         <div className="rounded-lg flex flex-col w-full gap-4 ">
           <div className="flex flex-col w-full sm:flex-row gap-2">
-            <b className="sm:w-1/4 w-full text-left">Title</b>
-            <p className="sm:w-3/4 w-full text-left border p-2 rounded-md bg-gray-100 font-semibold">
+            <b className="sm:w-1/4 w-full text-left text-sm sm:text-md">Title</b>
+            <p className="sm:w-3/4 w-full text-left border p-2 rounded-md bg-gray-100 font-semibold text-sm sm:text-md">
               {approval.title}
             </p>
           </div>
           <div className="flex w-full flex-col w-full sm:flex-row gap-2">
-            <b className="sm:w-1/4 w-full text-left">Description</b>
-            <p className="sm:w-3/4 w-full text-left border p-2 rounded-md bg-gray-100 ">
+            <b className="sm:w-1/4 w-full text-left text-sm sm:text-md">Description</b>
+            <p className="sm:w-3/4 w-full text-left border p-2 rounded-md bg-gray-100 text-sm sm:text-md">
               {approval.description}
             </p>
           </div>
         </div>
       </div>
       <div className="border rounded-lg border-2 mt-4 py-4">
-        <h4 className="text-lg font-bold ">List Responder</h4>
+        <h4 className="text-sm sm:text-lg font-bold ">List Responder</h4>
         {approver
           ? approver.map((app, idx) => (
               <div class=" mx-4 flex px-4 py-3 bg-white-600 text-gray-700 border rounded-md rounded flex-col md:flex-row mt-4">
