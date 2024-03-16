@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import StepTwo from "./StepTwo";
 import StepOne from "./StepOne";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
+import axios from "axios";
 
 const Form = () => {
+  const params = useParams();
+  const navigate = useNavigate();
+
   const [step, setStep] = useState(1);
   const stepArr = [1, 2];
   const [input, setInput] = useState({
@@ -14,11 +18,70 @@ const Form = () => {
   });
   const [approver, setApprover] = useState([]);
 
-  const submitApproval = () => {};
+  const submitApproval = () => {
+    const submitToast = toast.loading("Submitting ...")
+
+    if(approver.length > 0){
+      axios
+      .post(
+        `${process.env.REACT_APP_API_HOSTNAME}/api/flow/submit/` + params.id,
+        { approver: approver }
+        )
+        .then((res) => {
+          console.log("res", res);
+          if (res) {
+            toast.remove(submitToast)
+            navigate("/submission/" + params.id)
+          }
+        })
+        .catch((err) => {
+          toast.error("Error submit flow")
+        });
+    } else {
+      toast.remove(submitToast)
+      toast.error("Need at least 1 approver")
+    }
+  };
+
+  const saveStepOne = () => {
+    axios
+      .post(
+        `${process.env.REACT_APP_API_HOSTNAME}/api/flow/update/` + params.id,
+        input
+      )
+      .then((res) => {
+        console.log("res", res);
+        if (res) {
+          setStep(2);
+        }
+      })
+      .catch((err) => {});
+  };
 
   useEffect(() => {
     toast.success("Saved !");
   }, [step]);
+
+  useEffect(() => {
+    axios
+      .get(`${process.env.REACT_APP_API_HOSTNAME}/api/flow/` + params.id)
+      .then((res) => {
+        console.log(res);
+        setInput({
+          email: res.data.sender.email,
+          title: res.data.title,
+          description: res.data.description,
+        });
+        setApprover(res.data.receiver);
+
+        if (res.data.status != "D") {
+          navigate("/submission/" + params.id);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
   return (
     <>
       <div className="w-full h-full py-4 px-6">
@@ -56,7 +119,7 @@ const Form = () => {
               </Link>
               <button
                 className="py-2 px-5 border text-sm sm:text-md bg-indigo-700 text-white font-bold rounded-lg hover:bg-indigo-600 mt-8"
-                onClick={() => setStep(2)}
+                onClick={() => saveStepOne()}
               >
                 {" "}
                 Next
@@ -71,15 +134,15 @@ const Form = () => {
                 {" "}
                 Prev
               </button>
-              <Link to={"/submission"}>
-                <button
-                  className="py-2 px-5 border text-sm sm:text-md bg-indigo-700 text-white font-bold rounded-lg hover:bg-indigo-600 mt-8"
-                  //   onClick={""}
-                >
-                  {" "}
-                  Submit
-                </button>
-              </Link>
+              {/* <Link to={"/submission"}> */}
+              <button
+                className="py-2 px-5 border text-sm sm:text-md bg-indigo-700 text-white font-bold rounded-lg hover:bg-indigo-600 mt-8"
+                onClick={() => submitApproval()}
+              >
+                {" "}
+                Submit
+              </button>
+              {/* </Link> */}
             </div>
           )}
         </div>

@@ -1,16 +1,26 @@
 import axios from "axios";
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
+  const [uuid, setUuid] = useState("");
 
   const createFlow = () => {
-    axios.post(`${process.env.REACT_APP_API_HOSTNAME}/api/flow/new`).then((res) => {
+    axios
+      .post(`${process.env.REACT_APP_API_HOSTNAME}/api/flow/new`)
+      .then((res) => {
+        if (res.data) {
+          navigate("/new/" + res.data.uuid);
+        }
+      })
+      .catch((err) => {});
+  };
 
-    }).catch((err) => {
-      
-    })
-  }
+  const checkApproval = () => {
+    navigate(`/approval/check/${uuid}`)
+  };
+
   return (
     <div className="my-20">
       <h4 className="text-4xl font-bold my-5">
@@ -25,20 +35,30 @@ const Home = () => {
       </p>
       {/* <h4 className="text-lg font-semibold mb-2">Need approval ? </h4> */}
       {/* <Link to={"/new"}> */}
-        <button className="py-4 px-7 border bg-indigo-700 text-sm sm:text-lg text-white font-bold rounded-lg hover:bg-indigo-600 mt-8"
-        onClick={() => createFlow()}>
-          {" "}
-          Create Approval Flow
-        </button>
+      <button
+        className="py-4 px-7 border bg-indigo-700 text-sm sm:text-lg text-white font-bold rounded-lg hover:bg-indigo-600 mt-8"
+        onClick={() => createFlow()}
+      >
+        {" "}
+        Create Approval Flow
+      </button>
       {/* </Link> */}
       <div className="w-1/2 sm:w-1/3 m-auto flex flex-col justify-center items-center mt-20 gap-2">
-        <p className="font-semibold text-gray-400 text-sm sm:text-lg">Track approval</p>
+        <p className="font-semibold text-gray-400 text-sm sm:text-lg">
+          Track approval
+        </p>
         <input
           type="text"
           placeholder="approval id"
+          name="uuid"
+          value={uuid}
+          onChange={(e) => setUuid(e.target.value)}
           className="border rounded-lg py-2 w-full text-sm sm:text-lg text-center"
         ></input>
-        <button className="py-2 w-full border bg-gray-400 text-sm sm:text-lg text-white font-bold rounded-lg hover:bg-gray-500">
+        <button
+          onClick={() => checkApproval()}
+          className="py-2 w-full border bg-gray-400 text-sm sm:text-lg text-white font-bold rounded-lg hover:bg-gray-500"
+        >
           {" "}
           Check
         </button>

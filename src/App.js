@@ -5,6 +5,9 @@ import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 import Home from "./Home";
 import { Toaster } from "react-hot-toast";
 import Submission from "./Submission";
+import ApprovalProcess from "./ApprovalProcess";
+import ApprovalResponded from "./ApprovalResponded";
+import CheckApproval from "./CheckApproval";
 
 function App() {
   return (
@@ -15,8 +18,12 @@ function App() {
         <Routes>
           <Route path="*" element={<Navigate to={"/"} />}></Route>
           <Route path="/" element={<Home />}></Route>
-          <Route path="/new" element={<Form />}></Route>
-          <Route path="/submission" element={<Submission />}></Route>
+          <Route path="/new/:id" element={<Form />}></Route>
+          <Route path="/submission/:id" element={<Submission />}></Route>
+
+          <Route path="/approval/check/:id" element={<CheckApproval />}></Route>
+          <Route path="/approval/process/:id" element={<ApprovalProcess />}></Route>
+          <Route path="/approval/responded" element={<ApprovalResponded />}></Route>
 
         </Routes>
        </BrowserRouter>

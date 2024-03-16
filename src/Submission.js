@@ -1,7 +1,22 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
+import toast from "react-hot-toast";
+import { Link, useParams } from "react-router-dom";
 
 const Submission = () => {
+  const params = useParams();
+  const [uuid, setUuid] = useState("")
+
+  useEffect(() => {
+    axios.get(`${process.env.REACT_APP_API_HOSTNAME}/api/flow/` + params.id).then((res) => {
+      console.log(res);
+      setUuid(res.data.uuid)
+      toast.success("Data loaded");
+
+    }).catch((err) => {
+      toast.error("");
+    })
+  }, [])
   return (
     <>
       <div className="py-10">
@@ -23,7 +38,7 @@ const Submission = () => {
             <h4 className="text-md font-semibold">Below is your approval ID</h4>
             <input
               disabled
-              value={"asd12-kjjn1-uyy6t-ooi98"}
+              value={uuid}
               className="bg-indigo-200 text-gray-700 font-bold px-6 py-2 rounded-md text-center text-sm sm:text-lg"
             ></input>
             <div className=" flex items-center gap-2 py-2 w-full text-center justify-center bg-gray-500 text-white rounded-lg font-semibold hover:bg-gray-400">
