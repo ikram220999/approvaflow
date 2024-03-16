@@ -9,7 +9,7 @@ const Home = () => {
 
   const createFlow = () => {
     axios
-      .post(`${process.env.REACT_APP_API_HOSTNAME}/api/flow/new`)
+      .post(`${process.env.REACT_APP_API_HOSTNAME}api/flow/new`)
       .then((res) => {
         if (res.data) {
           navigate("/new/" + res.data.uuid);
