@@ -11,7 +11,6 @@ const Submission = () => {
     navigator.clipboard.writeText(uuid)
     .then(() => toast.success("Id copied"))
     .catch(() => toast.error("Error copy Id"));
-
   }
 
   useEffect(() => {

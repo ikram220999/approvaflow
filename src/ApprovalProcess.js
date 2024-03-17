@@ -51,8 +51,11 @@ const ApprovalProcess = () => {
      ).then((res) => {
       console.log("res", res);
       toast.remove(submitResponse)
-
-      toast.success("Respond submitted")
+      if(res.data.message == "success"){
+        toast.success("Respond submitted")
+      } else {
+        toast.error("Approval already completed")
+      }
       setTimeout(() => {
         navigate("/approval/responded")
       }, 2000)
