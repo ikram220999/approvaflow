@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import toast from "react-hot-toast";
+import { validateEmail } from "./function";
 
 const StepTwo = (props) => {
   const [approver, setApprover] = useState(props.approver);
@@ -16,23 +17,38 @@ const StepTwo = (props) => {
   };
 
   const validateInput = (approver, input) => {
-    console.log(approver, input);
-    if (approver.filter((app) => app.email == input.email).length > 0) {
-      return false;
+
+    let result = {
+      status: true,
+      msg: "Success"
     }
 
-    return true;
+    console.log(approver, input);
+    if (approver.filter((app) => app.email == input.email).length > 0) {
+      result.status = false
+      result.msg = "Cannot list duplicate email"
+      return result;
+    }
+
+    if(!validateEmail(input.email)){
+      result.status = false
+      result.msg = "Wrong email format"
+      return result;
+    }
+
+    return result;
   };
 
   const addApprover = () => {
-    if (validateInput(approver, input)) {
+    let validateResult = validateInput(approver, input)
+    if (validateResult.status) {
       setApprover([...approver, input]);
       setInput({
         role: "",
         email: "",
       });
     } else {
-      toast.error("Error add data");
+      toast.error(validateResult.msg);
     }
   };
 
