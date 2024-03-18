@@ -16,31 +16,29 @@ const StepTwo = (props) => {
   };
 
   const validateInput = (approver, input) => {
-
     console.log(approver, input);
-    if(approver.filter((app) => app.email == input.email).length > 0){
-      return false
+    if (approver.filter((app) => app.email == input.email).length > 0) {
+      return false;
     }
 
-    return true
-  }
+    return true;
+  };
 
   const addApprover = () => {
-
-    if(validateInput(approver, input)){
+    if (validateInput(approver, input)) {
       setApprover([...approver, input]);
       setInput({
         role: "",
         email: "",
       });
     } else {
-      toast.error("Error add data")
+      toast.error("Error add data");
     }
   };
 
   const removeApprover = (email) => {
-    setApprover(approver.filter((app) => app.email != email))
-  }
+    setApprover(approver.filter((app) => app.email != email));
+  };
 
   useEffect(() => {
     props.setApprover(approver);
@@ -75,37 +73,40 @@ const StepTwo = (props) => {
           </button>
         </div>
         <hr className="mt-4" />
-        <div class="border-2 border-gray-400 rounded-lg p-2">
-          <div class="border-l-2 mt-10 overflow-scroll h-60">
-            {approver.map((app, idx) => (
-              <div class="transform transition cursor-pointer  ml-10  flex px-6 py-4 bg-indigo-400 text-white rounded mb-10 flex-col md:flex-row space-y-2 md:space-y-2">
-                <div class="w-5 h-5 bg-indigo-600 absolute -left-10 transform -translate-x-2/4 rounded-full z-10 mt-0 md:mt-0"></div>
-
-                <div class="w-10 h-1 bg-indigo-300 absolute -left-10 z-0"></div>
-
-                <div class="flex items-center justify-between w-full">
-                  {/* <h1 class="md:text-lg w-1/6">{idx + 1}</h1> */}
-                  <div className="flex flex-col text-left md:text-lg w-5/6">
-                    <h1 class="md:text-xl font-semibold">{app.email}</h1>
-                    <h3>
-                      <i></i>
-                      {app.role}
-                    </h3>
-                  </div>
-                  <div className="w-1/6">
-                    <button className="bg-red-600 p-2 rounded-lg w-8" onClick={() => removeApprover(app.email)}>
+        <div class=" border-gray-400 rounded-lg p-2">
+          <div class="mt-5 overflow-scroll h-60">
+            <b className="">Approver List</b>
+            <div class="flex h-auto items-center justify-start bg-white w-full mt-4">
+              <div class=" w-full">
+                {approver.map((app) => (
+                  <div class="w-full mb-2 flex justify-between  border-l-4 border-s rounded-md border-indigo-500 py-4 px-4 shadow-sm">
+                    <div className="flex">
+                     
+                      <div class="ml-6 text-start">
+                        <h4 class="font-bold text-indigo-500">{app.email}</h4>
+                        <p class=" max-w-screen-sm text-sm text-gray-500">
+                          {app.role}
+                        </p>
+                        {/* <span class="mt-1 block text-sm font-semibold text-indigo-500">
+                    2007
+                  </span> */}
+                      </div>
+                    </div>
+                    <div onClick={() => removeApprover(app.email)}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
-                        viewBox="0 0 448 512"
-                        fill="white"
+                        viewBox="0 0 512 512"
+                        fill="currentColor"
+                        className="h-7 w-7 text-red-500 cursor-pointer"
                       >
-                        <path d="M135.2 17.7L128 32H32C14.3 32 0 46.3 0 64S14.3 96 32 96H416c17.7 0 32-14.3 32-32s-14.3-32-32-32H320l-7.2-14.3C307.4 6.8 296.3 0 284.2 0H163.8c-12.1 0-23.2 6.8-28.6 17.7zM416 128H32L53.2 467c1.6 25.3 22.6 45 47.9 45H346.9c25.3 0 46.3-19.7 47.9-45L416 128z" />
+                        <path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM175 175c9.4-9.4 24.6-9.4 33.9 0l47 47 47-47c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9l-47 47 47 47c9.4 9.4 9.4 24.6 0 33.9s-24.6 9.4-33.9 0l-47-47-47 47c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l47-47-47-47c-9.4-9.4-9.4-24.6 0-33.9z" />
                       </svg>
-                    </button>
+                      
+                    </div>
                   </div>
-                </div>
+                ))}
               </div>
-            ))}
+            </div>
           </div>
         </div>
       </div>
