@@ -9,11 +9,13 @@ import ApprovalProcess from "./ApprovalProcess";
 import ApprovalResponded from "./ApprovalResponded";
 import CheckApproval from "./CheckApproval";
 import { SpeedInsights } from "@vercel/speed-insights/react"
+import { Analytics } from "@vercel/analytics/react"
 
 function App() {
   return (
     <div className="App py-6 min-h-screen flex items-center bg-indigo-50">
       <SpeedInsights />
+      <Analytics />
       <Toaster />
       <div className="border w-11/12 md:w-4/5 lg:w-1/2 rounded-2xl m-auto shadow-lg py-4 bg-white">
        <BrowserRouter>
