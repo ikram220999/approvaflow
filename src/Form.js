@@ -35,6 +35,7 @@ const Form = () => {
           }
         })
         .catch((err) => {
+          toast.remove(submitToast);
           toast.error("Error submit flow");
         });
     } else {
