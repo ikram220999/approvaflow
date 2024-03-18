@@ -19,12 +19,23 @@ const ApprovalProcess = () => {
     axios.get(`${process.env.REACT_APP_API_HOSTNAME}/api/approval/` + params.id + '?secret=' + urlparams.get("secret")).then((res) => {
         console.log("res", res);
         toast.remove(loadDataToast)
-
-        setData({
-            sender: res.data && res.data.sender ? res.data.sender.email : "",
-            title: res.data && res.data.approval ? res.data.approval.title : "",
-            description: res.data && res.data.approval ? res.data.approval.description : ""
-        })
+        if(res.data){
+          if(res.data.approver){
+            if(res.data.approver.status){
+              toast.remove(loadDataToast)
+              toast.success("Already responded")
+              setTimeout(() => {
+                navigate("/approval/responded")
+              },1000)
+            }
+          }else { 
+            setData({
+              sender: res.data && res.data.sender ? res.data.sender.email : "",
+              title: res.data && res.data.approval ? res.data.approval.title : "",
+              description: res.data && res.data.approval ? res.data.approval.description : ""
+            })
+          }
+        }
 
         toast.success("Data loaded ")
 
