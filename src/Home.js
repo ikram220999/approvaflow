@@ -66,7 +66,7 @@ const Home = () => {
             clip-rule="evenodd"
           />
         </svg>
-        <span className="text-black font-bold text-xl">{approvalCount}</span> Flow Completed
+        <span className="text-black font-bold text-xl">{approvalCount}</span> Flow Created
       
       </div>
       <div className="flex flex-col px-4 items-center gap-3">
