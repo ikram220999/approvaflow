@@ -4,6 +4,7 @@ import StepOne from "./StepOne";
 import toast from "react-hot-toast";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { validateEmail } from "./function";
 
 const Form = () => {
   const params = useParams();
@@ -48,18 +49,23 @@ const Form = () => {
     if (input.email == "") {
       toast.error("Sender details required");
     } else {
-      axios
-        .post(
-          `${process.env.REACT_APP_API_HOSTNAME}/api/flow/update/` + params.id,
-          input
-        )
-        .then((res) => {
-          console.log("res", res);
-          if (res) {
-            setStep(2);
-          }
-        })
-        .catch((err) => {});
+      if (validateEmail(input.email)) {
+        axios
+          .post(
+            `${process.env.REACT_APP_API_HOSTNAME}/api/flow/update/` +
+              params.id,
+            input
+          )
+          .then((res) => {
+            console.log("res", res);
+            if (res) {
+              setStep(2);
+            }
+          })
+          .catch((err) => {});
+      } else {
+        toast.error("Wrong email format");
+      }
     }
   };
 
