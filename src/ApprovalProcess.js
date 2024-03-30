@@ -29,13 +29,15 @@ const ApprovalProcess = () => {
               setTimeout(() => {
                 navigate("/approval/responded")
               },1000)
+            }else {
+              setData({
+                sender: res.data && res.data.sender ? res.data.sender.email : "",
+                title: res.data && res.data.approval ? res.data.approval.title : "",
+                description: res.data && res.data.approval ? res.data.approval.description : ""
+              })
             }
           }else { 
-            setData({
-              sender: res.data && res.data.sender ? res.data.sender.email : "",
-              title: res.data && res.data.approval ? res.data.approval.title : "",
-              description: res.data && res.data.approval ? res.data.approval.description : ""
-            })
+           
           }
         }
 
