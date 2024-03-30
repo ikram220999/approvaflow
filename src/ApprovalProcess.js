@@ -14,6 +14,8 @@ const ApprovalProcess = () => {
     description: ""
   });
 
+  console.log("data", data);
+
   const fetchApproval = () => {
     const loadDataToast = toast.loading("Load approval..")
     axios.get(`${process.env.REACT_APP_API_HOSTNAME}/api/approval/` + params.id + '?secret=' + urlparams.get("secret")).then((res) => {
